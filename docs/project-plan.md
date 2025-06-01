@@ -60,16 +60,3 @@ Build an AI‑powered assistant that helps job‑seekers refine their résumés 
 * **User Satisfaction**: SUS ≥ 70.
 * **Cost**: API cost < \$0.05 per full analysis.
 
-## 8 — Stretch Goals (Post‑MVP)
-
-* Cover‑letter generator with persona conditioning.
-* Multilingual résumé support.
-* Interview‑question predictor.
-* LinkedIn profile fixer‑upper.
-
-## 9 — Immediate Next Steps
-
-1. **Review & sign‑off** on this plan.
-2. Create GitHub repo → push README + issue templates.
-3. Schedule 30‑min weekly checkpoint (TBD).
-4. Start Week 1 tasks: system diagram, risk log, tech‑stack confirmations.
