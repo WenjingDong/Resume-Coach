@@ -26,7 +26,7 @@ Build an AI‑powered assistant that helps job‑seekers refine their résumés 
 
 * **Frontend**: React + Tailwind, deployed on Vercel.
 * **Backend API**: FastAPI in Docker → AWS ECS Fargate.
-* **Vector store**: pgvector (Postgres) → migratable to Pinecone.
+* **Vector store**: Pinecone.
 * **Embeddings**: OpenAI `text-embedding-3-small` (1536‑d).
 * **LLM**: GPT‑4o via OpenAI API; fallback to local Llama 3 8B for cost tests.
 * **Orchestration**: LangChain (LCEL).
