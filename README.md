@@ -19,7 +19,7 @@ Built by job‑seekers for job‑seekers — optimise your resume for any job de
 - **Frontend**: React + Tailwind (Vercel)
 - **Backend**: FastAPI in Docker (ECS Fargate)
 - **Embeddings**: OpenAI `text-embedding-3-small`
-- **Vector Store**: PostgreSQL + pgvector (swap-able with Pinecone)
+- **Vector Store**: Pinecone
 - **LLM**: GPT-4o via OpenAI API; local Llama 3 8B fallback
 - **CI/CD**: GitHub Actions → Amazon ECR 🏷️ → ECS Blue-Green
 - **Observability**: Prometheus + Grafana, structured logs
