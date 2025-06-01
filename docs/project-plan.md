@@ -47,13 +47,8 @@ Build an AI‑powered assistant that helps job‑seekers refine their résumés 
 | 7    | End‑to‑end demo & UX test       | Recruit 3 users; collect SUS & qualitative feedback       |
 | 8    | Polish & public launch          | Harden infra; write blog post; deploy demo URL            |
 
-## 6 — Learning Goals
 
-* Practise **ML system design**: retrieval pipelines, vector DB, latency budgets.
-* Deepen **prompt engineering** and evaluation for production.
-* Solidify **infra skills**: Docker, ECS, CI/CD, monitoring.
-
-## 7 — Evaluation & Metrics
+## 6 — Evaluation & Metrics
 
 * **Latency**: ≤ 10 s P95 end‑to‑end.
 * **Accuracy**: Skill‑gap recall ≥ 90 %.
