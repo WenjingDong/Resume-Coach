@@ -20,7 +20,5 @@ jobs:
       - name: Install deps
         run: pip install -r backend/requirements.txt pytest
 
-      - name: Placeholder test
-        run: |
-          echo -e  "def test_pass():\n    assert True" > test_placeholder.py
-          pytest -q
+      - name: Run tests
+        run: pytest -q
