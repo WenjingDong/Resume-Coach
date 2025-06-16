@@ -28,7 +28,7 @@ Built by job‑seekers for job‑seekers — optimise your resume for any job de
 Prerequisites: Docker ≥ 25, Python 3.11, make
 1. Clone
    
-$ git clone https://github.com/your‑org/resume‑coach && cd resume‑coach
+$ git clone https://github.com/WenjingDong/Resume-Coach && cd resume‑coach
 
 2. Bring up dev stack
    
