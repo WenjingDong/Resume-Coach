@@ -46,4 +46,5 @@ Run tests
 $ make test   # pytest
 
 Lint / fmt
+
 $ pre-commit run --all-files
