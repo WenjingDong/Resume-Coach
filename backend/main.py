@@ -1,7 +1,13 @@
 from fastapi import FastAPI
 from fastapi import HTTPException, status, UploadFile, File
 from backend.parsers.pdf_parser import parse_pdf
+import logging, sys
 
+logging.basicConfig(
+    stream=sys.stdout,
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(name)s | %(message)s",
+)
 app = FastAPI()
 
 @app.get("/healthz")
