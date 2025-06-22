@@ -23,3 +23,29 @@ Built by job‑seekers for job‑seekers — optimise your resume for any job de
 - **LLM**: GPT-4o via OpenAI API; local Llama 3 8B fallback
 - **CI/CD**: GitHub Actions → Amazon ECR 🏷️ → ECS Blue-Green
 - **Observability**: Prometheus + Grafana, structured logs
+
+## ⚡ Quick Start (Local Dev)
+Prerequisites: Docker ≥ 25, Python 3.11, make
+1. Clone
+   
+$ git clone https://github.com/WenjingDong/Resume-Coach && cd resume‑coach
+
+2. Bring up dev stack
+   
+$ make dev   # spins up postgres + backend on http://localhost:8000
+
+3. Run frontend
+   
+$ cd web && npm i && npm run dev  # http://localhost:3000
+
+4. Run the API
+   
+$ unicorn backend.main:app --reload
+
+**Run tests**
+
+$ make test   # pytest
+
+**Lint / fmt**
+
+$ pre-commit run --all-files
