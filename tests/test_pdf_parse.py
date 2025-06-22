@@ -7,6 +7,6 @@ def test_parse_sample_resume():
     # crude smoke checks
     first_page = data["pages"][0]
     assert first_page["page_num"] == 1
-    assert any("Charles" in l["text"] for l in first_page["lines"])
+    assert any("Freshman" in l["text"] for l in first_page["lines"])
     assert "Email" in data["metadata"]["text_only"]
     assert len(first_page["lines"]) > 10
