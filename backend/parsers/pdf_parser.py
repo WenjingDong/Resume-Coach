@@ -19,7 +19,7 @@ def parse_pdf(path_or_bytes) -> Dict[str, Any]:
                 {"text": obj["text"], "x0": obj["x0"], "top": obj["top"]}
                 for obj in page.extract_words(x_tolerance=1, y_tolerance=3)
             ]
-            pages.append({"pages_num": i, "lines": lines})
+            pages.append({"page_num": i, "lines": lines})
             full_text.append(page.extract_text() or "")
 
     return {"pages": pages, "metadata": {"text_only": "\n".join(full_text)}}
