@@ -9,6 +9,20 @@ jobs:
   smoke-test:
     runs-on: ubuntu-latest
 
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: resume
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: resumes
+        options: >-
+          --health-cmd="pg_isready -U resume -d resumes"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+      env:
+        DATABASE_URL: postgresql://resume:secret@db/resumes
     steps:
       - uses: actions/checkout@v4
 
@@ -26,4 +40,4 @@ jobs:
         run: pytest -q
 
       - name: Init db schema
-        run: psql postgresql://resume:secret@db/resumes -f backend/sql/001_init.sql
+        run: psql "$DATABASE_URL" -f backend/sql/001_init.sql
