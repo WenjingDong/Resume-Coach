@@ -1,0 +1,8 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: resume
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: resumes
+    ports: ["8018:8018"]
