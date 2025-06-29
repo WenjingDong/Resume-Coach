@@ -16,6 +16,15 @@ jobs:
       - name: Show db logs if it crashed
         if: failure()    # this runs only when a previous step fails
         run: docker logs $(docker ps -aqf "name=db") | tail -n 50
+
+      - name: Wait for Postgres on localhost:6572
+        run: |
+          for i in {1..20}; do
+            pg_isready -h 127.0.0.1 -p 6572 -U resume && break
+            echo "🏃 waiting for PG ($i)…"
+            sleep 2
+          done
+
       - name: Ping DB
         run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -c '\l'
 
