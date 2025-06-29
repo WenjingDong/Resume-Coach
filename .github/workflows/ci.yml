@@ -12,6 +12,7 @@ jobs:
     services:
       db: #  ← this hostname MUST be “db”
         image: pgvector/pgvector:pg16
+        ports: ["6572:5432"]
         env:
           POSTGRES_USER: resume
           POSTGRES_PASSWORD: secret
@@ -43,7 +44,9 @@ jobs:
           done
 
       - name: Init db schema
-        run: psql "$DATABASE_URL" -f backend/sql/001_init.sql
+        env:
+          PGPASSWORD: secret
+        run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -c '\l'
 
       - name: Run tests
         env:
