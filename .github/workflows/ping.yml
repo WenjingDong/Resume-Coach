@@ -7,11 +7,11 @@ jobs:
     services:
       db:
         image: pgvector/pgvector:pg16
-        ports: ["6543:5432"]
+        ports: ["8098:5432"]
         env:
           POSTGRES_USER: resume
           POSTGRES_PASSWORD: secret
           POSTGRES_DB: resumes
     steps:
       - name: Ping DB
-        run: psql "postgresql://resume:secret@localhost:6543/resumes" -c '\l'
+        run: psql "postgresql://resume:secret@localhost:8098/resumes" -c '\l'
