@@ -13,5 +13,9 @@ jobs:
           POSTGRES_PASSWORD: secret
           POSTGRES_DB: resumes
     steps:
+      - - name: Show db logs if it crashed
+          if: failure()    # this runs only when a previous step fails
+          run: docker logs $(docker ps -aqf "name=db")
+
       - name: Ping DB
         run: psql "postgresql://resume:secret@localhost:8098/resumes" -c '\l'
