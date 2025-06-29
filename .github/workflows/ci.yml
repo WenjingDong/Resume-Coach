@@ -24,3 +24,7 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: pytest -q
+
+      - name: Init db schema
+        run: | 
+          psql postgresql://resume:secret@localhost/resumes -f backend/sql/001_init.sql
