@@ -5,4 +5,4 @@ services:
       POSTGRES_USER: resume
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: resumes
-      DATABASE_URL: postgresql://resume:secret@db:5432/resumes
+      DATABASE_URL: postgresql://resume:secret@db/resumes
