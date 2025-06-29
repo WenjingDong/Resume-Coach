@@ -21,4 +21,4 @@ jobs:
 
       - name: Show db logs
         if: failure()
-        run: docker logs $(docker ps -qf "name=db") | tail -n 50
+        run: docker logs $(docker ps -q -f "name=db") | tail -n 50
