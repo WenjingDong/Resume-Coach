@@ -27,4 +27,4 @@ jobs:
 
       - name: Init db schema
         run: | 
-          psql postgresql://resume:secret@localhost/resumes -f backend/sql/001_init.sql
+          psql postgresql://resume:secret@db:5432/resumes -f backend/sql/001_init.sql
