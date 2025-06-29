@@ -5,4 +5,4 @@ services:
       POSTGRES_USER: resume
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: resumes
-    ports: ["8018:8018"]
+#    ports: ["8018:8018"]
