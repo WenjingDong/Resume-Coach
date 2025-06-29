@@ -26,5 +26,4 @@ jobs:
         run: pytest -q
 
       - name: Init db schema
-        run: | 
-          psql postgresql://resume:secret@db:5432/resumes -f backend/sql/001_init.sql
+        run: psql postgresql://resume:secret@db:5432/resumes -f backend/sql/001_init.sql

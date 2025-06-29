@@ -14,6 +14,3 @@ CREATE INDEX resume_chunks_embedding_idx
     ON resume_chunks
     USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);
 
-# backend/scripts/init_db.sh
-#!/usr/bin/env bash
-psql "$DATABASE_URL" -f backend/sql/001_init.sql
