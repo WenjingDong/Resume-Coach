@@ -7,7 +7,7 @@ jobs:
     services:
       db:
         image: pgvector/pgvector:pg16
-        ports: ["8098:5432"]
+        ports: ["6572:5432"]
         env:
           POSTGRES_USER: resume
           POSTGRES_PASSWORD: secret
@@ -17,4 +17,8 @@ jobs:
         if: failure()    # this runs only when a previous step fails
         run: docker logs $(docker ps -aqf "name=db") | tail -n 50
       - name: Ping DB
-        run: psql "postgresql://resume:secret@localhost:8098/resumes?sslmode=disable" -c '\l'
+        run: psql "postgresql://resume:secret@localhost:6572/resumes?sslmode=disable" -c '\l'
+
+      - name: Show db logs
+        if: failure()
+        run: docker logs $(docker ps -qf "name=db") | tail -n 50
