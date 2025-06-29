@@ -1,0 +1,16 @@
+name: db-ping
+on: workflow_dispatch
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: resume
+          POSTGRES_PASSWORD: secret
+          POSTGRES_DB: resumes
+    steps:
+      - name: Ping DB
+        run: psql "postgresql://resume:secret@db/resumes" -c '\l'
