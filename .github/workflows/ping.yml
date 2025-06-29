@@ -15,6 +15,6 @@ jobs:
     steps:
       - name: Show db logs if it crashed
         if: failure()    # this runs only when a previous step fails
-        run: docker logs $(docker ps -aqf "name=db")
+        run: docker logs $(docker ps -aqf "name=db") | tail -n 50
       - name: Ping DB
-        run: psql "postgresql://resume:secret@localhost:8098/resumes" -c '\l'
+        run: psql "postgresql://resume:secret@localhost:8098/resumes?sslmode=disable" -c '\l'
