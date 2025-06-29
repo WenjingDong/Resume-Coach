@@ -46,7 +46,7 @@ jobs:
       - name: Init db schema
         env:
           PGPASSWORD: secret
-        run: psql "$DATABASE_URL" -f backend/sql/001_init.sql #psql -h 127.0.0.1 -p 6572 -U resume -d resumes -c '\l'
+        run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -c '\l'
 
       - name: Run tests
         env:
