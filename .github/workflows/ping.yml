@@ -17,8 +17,13 @@ jobs:
         if: failure()    # this runs only when a previous step fails
         run: docker logs $(docker ps -aqf "name=db") | tail -n 50
       - name: Ping DB
-        run: psql "postgresql://resume:secret@localhost:6572/resumes?sslmode=disable" -c '\l'
+        run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -c '\l'
 
       - name: Show db logs
         if: failure()
-        run: docker logs $(docker ps -q -f "name=db") | tail -n 50
+        run: |
+          docker ps -a                     #
+          CONTAINER_ID=$(docker ps -aq | head -n 1)
+          echo "::group::Postgres logs"
+          docker logs "$CONTAINER_ID" | tail -n 100
+          echo "::endgroup::"
