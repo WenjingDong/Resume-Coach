@@ -2,15 +2,16 @@
 import os, types, pytest, numpy as np, openai, psycopg
 
 # 1 — mock OpenAI embeddings (avoids real network & new client kwargs)
-@pytest.fixture(autouse=True)
-def _mock_openai(monkeypatch):
-    def _fake_create(model, input):
-        vec = np.zeros(1536); vec[0] = 1.0       # fixed unit vector
+class _DummyEmbeddings(types.SimpleNamespace):
+    def create(self, model, input):
+        vec = np.zeros(1536); vec[0] = 1.0
         return openai.types.EmbeddingList(
             data=[openai.types.Embedding(embedding=vec.tolist(), index=0)],
-            model=model, object="list", usage=None
+            model=model, object="list", usage=None,
         )
-    monkeypatch.setattr(openai.embeddings, "create", _fake_create)
+@pytest.fixture(autouse=True)
+def _patch_openai(monkeypatch):
+    monkeypatch.setattr(openai, "embeddings", _DummyEmbeddings(), raising=False)
 
 # 2 — mock psycopg.connect so tests never touch the DB
 class _FakeCur(types.SimpleNamespace):
