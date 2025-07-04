@@ -18,7 +18,7 @@ def test_score_resume(tmp_path):
     db = psycopg.connect(os.environ["DATABASE_URL"])
     cur = db.cursor()
 
-    # Clean slate for htis test
+    # Clean slate for this test
     cur.execute("DELETE FROM resume_chunks WHERE resume_id = 'unit_test'")
     db.commit()
 
