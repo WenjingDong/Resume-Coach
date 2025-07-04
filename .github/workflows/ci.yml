@@ -53,4 +53,5 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
           DATABASE_URL: postgresql://resume:secret@localhost:6572/resumes?sslmode=disable
-        run: pytest --cov=backend --cov-fail-under=60 -q # temp threshold
+          OPENAI_API_KEY: test
+        run: pytest  -m "not integration"  --cov=backend --cov-fail-under=60 -q # temp threshold

@@ -1,5 +1,8 @@
 import psycopg, os, numpy as np
 from backend.scripts.embed_loader import embed
+import pytest
+pytestmark = pytest.mark.integration
+
 
 def cosine(q, v):
     return np.dot(q, v)/(np.linalg.norm(q) * np.linalg.norm(v))

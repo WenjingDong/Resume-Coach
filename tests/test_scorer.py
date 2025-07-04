@@ -1,7 +1,8 @@
 import os, psycopg, numpy as np
 from backend.analysis.scorer import score_resume
 from backend.analysis.skill_extractor import extract_skills
-
+import pytest
+pytestmark = pytest.mark.integration
 
 def insert_dummy_chunk(cur, resume_id, text, vec=None):
     if vec is None:
