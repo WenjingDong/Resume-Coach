@@ -23,7 +23,8 @@ jobs:
           --health-timeout=5s
           --health-retries=5
     env:
-        DATABASE_URL: postgresql://resume:secret@db/resumes?sslmode=disable
+        DATABASE_URL: postgresql://resume:secret@localhost:6572/resumes?sslmode=disable
+        PGPASSWORD: secret
     steps:
       - uses: actions/checkout@v4
 
@@ -38,7 +39,7 @@ jobs:
       - name: Wait for Postgres
         run: |
           for i in {1..20}; do
-            pg_isready -h db -U resume && break -U resume && break
+            pg_isready -h db -U resume && break
             echo "🏃 waiting for PG ($i)…"
             sleep 2
           done
@@ -51,5 +52,5 @@ jobs:
       - name: Run tests
         env:
           PYTHONPATH: ${{ github.workspace }}
-          DATABASE_URL: postgresql://resume:secret@db/resumes?sslmode=disable
+          DATABASE_URL: postgresql://resume:secret@localhost:6572/resumes?sslmode=disable
         run: pytest --cov=backend --cov-fail-under=60 -q # temp threshold
