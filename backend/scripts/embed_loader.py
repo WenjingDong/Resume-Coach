@@ -3,13 +3,15 @@ from pathlib import Path
 import openai, psycopg
 from backend.parsers.pdf_parser import parse_pdf
 
-openai.api_key = os.environ['OPENAI_API_KEY']
+# openai.api_key = os.environ['OPENAI_API_KEY']
 conn = psycopg.connect(os.environ["DATABASE_URL"])
 cur = conn.cursor()
 
 CHUNK_TOKENS = 400 # keep under model limit
 
 def embed(text: str):
+    if not openai.api_key:
+        openai.api_key = os.getenv('OPENAI_API_KEY', "dummy")
     r = openai.embeddings.create(
         model="text-embedding-3-small", input=text
     )
