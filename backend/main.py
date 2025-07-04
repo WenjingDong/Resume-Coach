@@ -19,7 +19,6 @@ logging.basicConfig(
 app = FastAPI()
 
 @app.get("/healthz")
-
 def health():
     return {"status": "ok"}
 
