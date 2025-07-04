@@ -3,6 +3,13 @@ from fastapi import HTTPException, status, UploadFile, File, Body
 from backend.parsers.pdf_parser import parse_pdf
 import logging, sys
 from backend.scripts.embed_loader import embed
+from backend.analysis.scorer import score_resume
+from pydantic import BaseModel
+
+class AnalyzeReq(BaseModel):
+    resume_id: str
+    jd_text: str
+
 
 logging.basicConfig(
     stream=sys.stdout,
@@ -36,3 +43,7 @@ async def search(query: str = Body(embed=True)):
         (vec,)
     )
     return [{"resume_id": r[0], "snippet": r[1]} for r in cur.fetchall()]
+
+@app.post("/analyze")
+def analyze(req: AnalyzeReq):
+    return score_resume(req.resume_id, req.jd_text)
