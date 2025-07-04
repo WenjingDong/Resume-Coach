@@ -49,4 +49,6 @@ jobs:
         run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -c '\l'
 
       - name: Run tests
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: pytest --cov=backend --cov-fail-under=80 -q
