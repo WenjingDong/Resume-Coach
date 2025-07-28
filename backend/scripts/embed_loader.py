@@ -2,6 +2,14 @@ import os, json, textwrap
 from pathlib import Path
 import openai, psycopg
 from backend.parsers.pdf_parser import parse_pdf
+from sentence_transformers import SentenceTransformer
+
+# Load once at module level
+model = SentenceTransformer("all-mpnet-base-v2")  # You can swap in other models later
+
+def embed(text: str) -> list[float]:
+    return model.encode(text).tolist()
+
 
 # openai.api_key = os.environ['OPENAI_API_KEY']
 conn = None
@@ -15,12 +23,7 @@ def get_conn():
     return conn
 
 def embed(text: str):
-    if not openai.api_key:
-        openai.api_key = os.getenv('OPENAI_API_KEY', "dummy")
-    r = openai.embeddings.create(
-        model="text-embedding-3-small", input=text
-    )
-    return r.data[0].embedding
+    return model.encode(text).tolist()
 
 def load_resume(pdf_path: Path):
     parsed = parse_pdf(pdf_path)
