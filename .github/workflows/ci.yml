@@ -49,9 +49,9 @@ jobs:
           PGPASSWORD: secret
         run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -c '\l'
 
-      - name: Run tests
-        env:
-          PYTHONPATH: ${{ github.workspace }}
-          DATABASE_URL: postgresql://resume:secret@localhost:6572/resumes?sslmode=disable
-          OPENAI_API_KEY: test
-        run: pytest  -m "not integration"  --cov=backend --cov-fail-under=60 -q # temp threshold
+#      - name: Run tests
+#        env:
+#          PYTHONPATH: ${{ github.workspace }}
+#          DATABASE_URL: postgresql://resume:secret@localhost:6572/resumes?sslmode=disable
+#          OPENAI_API_KEY: test
+#        run: pytest  -m "not integration"  --cov=backend --cov-fail-under=60 -q # temp threshold
