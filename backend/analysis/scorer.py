@@ -1,3 +1,4 @@
+import ast
 import numpy as np, psycopg, os
 from backend.analysis.skill_extractor import extract_skills
 from backend.scripts.embed_loader import embed
