@@ -11,7 +11,7 @@ def cosine(a, b):
 
 def score_resume(resume_id: str, jd_text: str, top_k=3) -> dict:
     skills = extract_skills(jd_text)
-    db = psycopg.connect(os.environ["DATABASE_URL"])
+    db = psycopg.connect(os.getenv("DATABASE_URL", "postgresql://resume:secret@localhost:5433/resumes"))
     cur = db.cursor()
 
     matched, missing, detail = [], [], []
@@ -20,14 +20,21 @@ def score_resume(resume_id: str, jd_text: str, top_k=3) -> dict:
         q_vec = embed(skill)
         cur.execute(
             "SELECT chunk, embedding FROM resume_chunks "
-            "WHERE resume_id=%s ORDER BY embedding <-> %s LIMIT %s",
+            "WHERE resume_id=%s ORDER BY embedding <-> %s::vector LIMIT %s",
             (resume_id, q_vec, top_k)
         )
         rows = cur.fetchall()
         best = rows[0] if rows else None
-        if best and cosine(q_vec, best[1]) >= THRESHOLD:
-            matched.append(skill)
-            detail.append({"skill": skill, "gap": False, "resume_snippet": best[0]})
+        q_vec = np.array(q_vec, dtype=np.float32)
+        if best:
+            vec_str = best[1]  # still a string like "[0.1, 0.2, ...]"
+            vec_list = ast.literal_eval(vec_str)
+            if cosine(q_vec, vec_list) >= THRESHOLD:
+                matched.append(skill)
+                detail.append({"skill": skill, "gap": False, "resume_snippet": best[0]})
+            else:
+                missing.append(skill)
+                detail.append({"skill": skill, "gap": True, "jd_snippet": f"JD mentions {skill}"})
         else:
             missing.append(skill)
             detail.append({"skill": skill, "gap": True, "jd_snippet": f"JD mentions {skill}"})
