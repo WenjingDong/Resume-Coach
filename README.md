@@ -1,4 +1,4 @@
- Resume Coach
+# Resume Coach
 
 AI‑powered resume reviewer that surfaces gaps, rewrites bullet points, and exports a recruiter‑ready PDF in seconds.
 
