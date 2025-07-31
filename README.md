@@ -1,30 +1,29 @@
-📄 Resume Coach
+# Resume Coach
 
 AI‑powered resume reviewer that surfaces gaps, rewrites bullet points, and exports a recruiter‑ready PDF in seconds.
 
 Built by job‑seekers for job‑seekers — optimise your resume for any job description while keeping your authentic voice.
 
-🚀 Features
+## Features
 
 | Category | Highlights |
 |----------|------------|
 | **Keyword & Gap Analysis** | Embedding-based similarity (OpenAI) + rule checks to score alignment with the target JD. |
 | **Actionable Feedback** | Concrete suggestions grouped by skill, impact, and formatting. |
 | **Smart Bullet Rewrites** | LLM proposes punchier, achievement-oriented bullets you can accept or tweak. |
-| **ATS Health Check** | Flags section order, fonts, tables, graphics that break common parsers. |
 | **One-Click Export** | Generate polished PDF / DOCX with consistent styling. |
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Frontend**: React + Tailwind (Vercel)
 - **Backend**: FastAPI in Docker (ECS Fargate)
 - **Embeddings**: OpenAI `text-embedding-3-small`
-- **Vector Store**: Pinecone
-- **LLM**: GPT-4o via OpenAI API; local Llama 3 8B fallback
+- **Vector Store**: PGVector
+- **LLM**: Mistral 8B
 - **CI/CD**: GitHub Actions → Amazon ECR 🏷️ → ECS Blue-Green
 - **Observability**: Prometheus + Grafana, structured logs
 
-## ⚡ Quick Start (Local Dev)
+##  Quick Start (Local Dev)
 Prerequisites: Docker ≥ 25, Python 3.11, make
 1. Clone
    
@@ -36,7 +35,7 @@ $ make dev   # spins up postgres + backend on http://localhost:8000
 
 3. Run frontend
    
-$ cd web && npm i && npm run dev  # http://localhost:3000
+$ cd web && npm install && npm run dev  # http://localhost:3000
 
 4. Run the API
    
