@@ -15,7 +15,7 @@ import psycopg
 from typing import List
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-JOBS_PATH = os.path.join(CURRENT_DIR, "..", "data", "sample_jobs.json")
+JOBS_PATH = os.path.join(CURRENT_DIR,  "data", "sample_jobs.json")
 
 class RecommendRequest(BaseModel):
     resume_text: str # or pass resumes and extract sills
