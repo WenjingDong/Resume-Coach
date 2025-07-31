@@ -1,6 +1,8 @@
 import psycopg, os, numpy as np
 from backend.scripts.embed_loader import embed
 import pytest
+from conftest import insert_dummy_chunk
+
 pytestmark = pytest.mark.integration
 
 
@@ -10,6 +12,10 @@ def cosine(q, v):
 def test_similarity():
     db = psycopg.connect(os.environ["DATABASE_URL"])
     cur = db.cursor()
+
+    # Insert a chunk that proves PyTorcn skill
+    insert_dummy_chunk(cur, "unit_test", "Implemented a DL application in PyTorch")
+    db.commit()
 
     q_vec = embed("machine learning engineers with PyTorch experience")
 
@@ -21,7 +27,7 @@ def test_similarity():
 
     db.commit()
     rows = cur.fetchall()
-    print(rows)
+    print(rows[0])
     assert any("PyTorch" in r[0] for r in rows)
 
 

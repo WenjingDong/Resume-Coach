@@ -1,6 +1,16 @@
 # tests/conftest.py
 import os, types, pytest, numpy as np, openai, psycopg
-
+from backend.scripts.embed_loader import embed
+def insert_dummy_chunk(cur, resume_id, text, vec=None):
+    if vec is None:
+        # vec = np.zeros(1536).tolist()
+        # vec[0] = 1.0
+        vec = embed(text)
+    cur.execute(
+        "INSERT INTO resume_chunks (resume_id, chunk, embedding)"
+        "Values (%s, %s, %s)",
+        (resume_id, text, vec)
+    )
 
 # 2 — mock psycopg.connect so tests never touch the DB
 class _FakeCur(types.SimpleNamespace):
