@@ -19,7 +19,9 @@ def test_similarity():
         (q_vec, )
     )
 
+    db.commit()
     rows = cur.fetchall()
+    print(rows)
     assert any("PyTorch" in r[0] for r in rows)
 
 
