@@ -6,7 +6,7 @@ CREATE TABLE resume_chunks (
     id         BIGSERIAL PRIMARY KEY,
     resume_id  TEXT          NOT NULL,
     chunk      TEXT          NOT NULL,
-    embedding  VECTOR(1536)  NOT NULL
+    embedding  VECTOR(768)  NOT NULL
 );
 
 -- 3. Approx-NN index (cosine)

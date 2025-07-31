@@ -44,10 +44,17 @@ jobs:
             sleep 2
           done
 
-      - name: Init db schema
+      - name: Check db is running
         env:
           PGPASSWORD: secret
         run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -c '\l'
+
+      - name: Initialize DB schema
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+          psql postgresql://resume:secret@localhost:5432/resumes -f backend/sql/001_init.sql
+
 
 #      - name: Run tests
 #        env:
