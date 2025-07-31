@@ -53,7 +53,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y postgresql-client
-          psql postgresql://resume:secret@localhost:5432/resumes -f backend/sql/001_init.sql
+          psql postgresql://resume:secret@localhost:6572/resumes -f backend/sql/001_init.sql
 
 
 #      - name: Run tests
