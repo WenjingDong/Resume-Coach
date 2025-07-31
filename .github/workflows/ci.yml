@@ -52,7 +52,7 @@ jobs:
       - name: Apply schema
         env:
           PGPASSWORD: secret
-        run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -f backend/db/001_init.sql
+        run: psql -h 127.0.0.1 -p 6572 -U resume -d resumes -f backend/scripts/001_init.sql
 
 
 
