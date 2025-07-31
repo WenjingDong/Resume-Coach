@@ -4,15 +4,28 @@ from backend.parsers.pdf_parser import parse_pdf
 from backend.scripts.embed_loader import store_resume_chunks, call_local_llm
 import logging,sys
 from backend.scripts.embed_loader import embed
-from backend.analysis.scorer import score_resume
+from backend.analysis.scorer import score_resume, match_score
 from backend.analysis.skill_extractor import extract_skills
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from uuid import uuid4
-import openai, os
+import openai, os, json
 import psycopg
+from typing import List
 
+class RecommendRequest(BaseModel):
+    resume_text: str # or pass resumes and extract sills
+
+class JobRecommendation(BaseModel):
+    job_id: str
+    title: str
+    score: int
+    matched_skills: List[str]
+
+class RecommendationResponse(BaseModel):
+    skills: List[str]
+    recommendations: List[JobRecommendation]
 
 class AnalyzeReq(BaseModel):
     resume_id: str
@@ -94,6 +107,16 @@ async def upload(
     #  Store embeddings into database
     store_resume_chunks(resume_id, resume_text)
 
+@app.post("/recommend", response_model=RecommendationResponse)
+def recommend_jobs(req: RecommendRequest):
+    skills = extract_skills(req.resume_text)
+
+    with open("backend/data/sample_jobs", "r") as f:
+        jobs = json.load(f)
+
+    scored_jobs = []
+
+
 
     return JSONResponse({
         "resume_id": resume_id,
@@ -154,3 +177,28 @@ async def suggest_edits(req: AnalyzeReq):
             })
     db.close()
     return {"suggestions": suggestions}
+
+@app.post("/recommend")
+def recommend_jobs(req: RecommendRequest):
+    skills = extract_skills(req.resume_text)
+
+    with open("backend/data/sample_jobs.json", "r") as f:
+        jobs = json.load(f)
+
+    scored_jobs = []
+    for job in jobs:
+        score, matched = match_score(skills, job["skills"])
+        if score > 0:
+            scored_jobs.append({
+                "job_id": job["id"],
+                "title": job["title"],
+                "score": score,
+                "matched_skills": matched
+            })
+
+    scored_jobs.sort(key=lambda x: x["score"], reverse=True)
+
+    return {
+        "skills": skills,
+        "recommendations": scored_jobs[:5]
+    }

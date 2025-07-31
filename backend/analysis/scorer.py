@@ -42,3 +42,7 @@ def score_resume(resume_id: str, jd_text: str, top_k=3) -> dict:
 
     score = int(len(matched) / max(len(skills), 1) * 100)
     return {"score": score, "matched": matched, "missing": missing,  "detail": detail}
+
+def match_score(resume_skills, job_skills):
+    matched = set(resume_skills).intersection(set(job_skills))
+    return len(matched), list(matched)

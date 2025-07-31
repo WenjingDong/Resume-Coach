@@ -1,0 +1,20 @@
+[
+  {
+    "id": "job1",
+    "title": "Machine Learning Engineer",
+    "description": "Looking for someone with experience in Python, PyTorch, and FastAPI.",
+    "skills": ["python", "pytorch", "fastapi"]
+  },
+  {
+    "id": "job2",
+    "title": "Data Scientist",
+    "description": "Requires SQL, data visualization, and machine learning.",
+    "skills": ["sql", "data visualization", "machine learning"]
+  },
+  {
+    "id": "job3",
+    "title": "ML Infra Engineer",
+    "description": "Experience with Docker, Kubernetes, and model deployment.",
+    "skills": ["docker", "kubernetes", "model deployment"]
+  }
+]
