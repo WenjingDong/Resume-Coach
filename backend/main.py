@@ -14,6 +14,9 @@ import openai, os, json
 import psycopg
 from typing import List
 
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+JOBS_PATH = os.path.join(CURRENT_DIR, "..", "data", "sample_jobs.json")
+
 class RecommendRequest(BaseModel):
     resume_text: str # or pass resumes and extract sills
 
@@ -107,23 +110,6 @@ async def upload(
     #  Store embeddings into database
     store_resume_chunks(resume_id, resume_text)
 
-@app.post("/recommend", response_model=RecommendationResponse)
-def recommend_jobs(req: RecommendRequest):
-    skills = extract_skills(req.resume_text)
-
-    with open("backend/data/sample_jobs", "r") as f:
-        jobs = json.load(f)
-
-    scored_jobs = []
-
-
-
-    return JSONResponse({
-        "resume_id": resume_id,
-        "resume": resume_text,
-        "job_description": jd_text
-    })
-
 @app.post("/suggest")
 async def suggest_edits(req: AnalyzeReq):
     resume_id = req.resume_id
@@ -182,7 +168,7 @@ async def suggest_edits(req: AnalyzeReq):
 def recommend_jobs(req: RecommendRequest):
     skills = extract_skills(req.resume_text)
 
-    with open("backend/data/sample_jobs.json", "r") as f:
+    with open(JOBS_PATH, "r") as f:
         jobs = json.load(f)
 
     scored_jobs = []
