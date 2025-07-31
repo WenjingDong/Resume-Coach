@@ -33,5 +33,5 @@ def test_score_resume(tmp_path):
     result = score_resume("unit_test", jd_text)
 
     assert result["score"] == 100
-    assert "Python" in result["matched"]
+    assert "python" in result["matched"]
     assert result["missing"] == []

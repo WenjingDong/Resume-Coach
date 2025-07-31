@@ -15,7 +15,7 @@ def test_similarity():
 
     cur.execute(
         "SELECT chunk, embedding FROM resume_chunks "
-        "ORDER BY embedding <-> %s LIMIT 3",
+        "ORDER BY embedding <-> %s::vector LIMIT 3",
         (q_vec, )
     )
 
