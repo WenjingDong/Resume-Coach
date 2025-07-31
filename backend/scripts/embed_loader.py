@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 import requests
 
 # Load once at module level
-model = SentenceTransformer("all-mpnet-base-v2")  # You can swap in other models later
+model = SentenceTransformer("all-mpnet-base-v2")
 
 def embed(text: str) -> list[float]:
     return model.encode(text).tolist()
