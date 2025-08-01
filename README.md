@@ -17,7 +17,7 @@ Built by job‑seekers for job‑seekers — optimise your resume for any job de
 
 - **Frontend**: React + Tailwind (Vercel)
 - **Backend**: FastAPI in Docker (ECS Fargate)
-- **Embeddings**: OpenAI `text-embedding-3-small`
+- **Embeddings**: `text-embedding-3-small`
 - **Vector Store**: PGVector
 - **LLM**: Mistral 8B
 - **CI/CD**: GitHub Actions → Amazon ECR 🏷️ → ECS Blue-Green
